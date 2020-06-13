@@ -1,0 +1,16 @@
+version: '3'
+services:
+  watch:
+    image: diyart/development
+    volumes:
+      - ../..:/usr/src/app
+    command: npm run watch
+  web:
+    depends_on:
+      - watch
+    image: diyart/development
+    volumes:
+      - ../..:/usr/src/app
+    command: npm run start-dev-web
+    ports:
+      - 4000:4000

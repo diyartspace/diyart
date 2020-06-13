@@ -1,0 +1,17 @@
+{
+  "name": "@diyart/engine",
+  "version": "0.0.0",
+  "repository": "https://github.com/diyartspace/diyart/tree/master/packages/engine",
+  "main": "lib/main.js",
+  "scripts": {
+    "clean": "dev-cli clean",
+    "eslint": "dev-cli eslint src",
+    "prettier": "dev-cli prettier 'src/**/*.ts'",
+    "build": "dev-cli build"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@diyart/dev": "0.0.0"
+  }
+}

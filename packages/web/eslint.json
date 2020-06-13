@@ -1,0 +1,17 @@
+{
+  "extends": "./node_modules/@diyart/dev/eslint.json",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "baseui"
+  ],
+  "rules": {
+    "baseui/deprecated-theme-api": "warn",
+    "baseui/deprecated-component-api": "warn",
+    "baseui/no-deep-imports": "warn"
+  }
+}

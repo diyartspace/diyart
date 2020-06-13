@@ -1,0 +1,27 @@
+{
+  "name": "diyart",
+  "private": true,
+  "scripts": {
+    "docker-dev": "docker run -it --rm -v $(pwd):/usr/src/app diyart/development sh",
+    "boot-full": "npm install && npm run boot -- --scope=@diyart/dev && npm run build-dev && npm run boot && npm run build",
+    "boot": "lerna bootstrap --hoist",
+    "clean-full": "npm run clean && node ./scripts/dev-cli run clean-full && lerna clean --yes",
+    "clean": "node ./scripts/dev-cli run clean",
+    "format-full": "node ./scripts/dev-cli run prettier && npm run format",
+    "format": "node ./scripts/dev-cli run eslint",
+    "watch": "node ./scripts/dev-cli watch build ./tmp/build-info.txt",
+    "check-deps": "node ./scripts/dev-cli check-deps",
+    "build-docker-dev": "docker build -t diyart/development ./docker/development",
+    "build-dev": "cd ./tools/dev && npm run build",
+    "build": "node ./scripts/dev-cli run --ignore @diyart/dev build",
+    "build-production": "npm run clean && npm run build && node ./scripts/dev-cli run build-production",
+    "start-dev-web": "cd ./packages/web && npm run start-dev",
+    "start-dev": "npm run build && docker-compose -p diyart_development -f ./docker/development/docker-compose.yml up"
+  },
+  "engines": {
+    "node": "12.18.0"
+  },
+  "devDependencies": {
+    "lerna": "3.22.1"
+  }
+}
