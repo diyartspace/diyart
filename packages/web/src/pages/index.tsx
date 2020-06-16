@@ -2,7 +2,7 @@ import { FileUploader } from 'baseui/file-uploader'
 import { NextPage } from 'next'
 import { useCallback } from 'react'
 
-import { PageHead } from '../components/common'
+import { PageHead } from '../app/common'
 
 const HomePage: NextPage = () => {
   const onDropAccepted = useCallback((accepted: File[]) => {

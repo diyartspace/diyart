@@ -1,0 +1,16 @@
+/* Based on https://github.com/firebase/firebaseui-web/issues/121 */
+
+.firebaseui-id-page-callback {
+  box-shadow: none !important;
+}
+
+.firebaseui-id-page-callback .mdl-progress {
+  height: 0 !important;
+}
+
+.firebaseui-id-page-callback .mdl-progress:after {
+  content: 'Authenticating...';
+  display: block;
+  text-align: center;
+  padding: 1rem;
+}
