@@ -2,6 +2,7 @@ import { FileUploader } from 'baseui/file-uploader'
 import { NextPage } from 'next'
 import Pica from 'pica/dist/pica'
 import { useCallback, useState } from 'react'
+import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 
 import { PageHead } from '../components/common'
 
@@ -44,7 +45,13 @@ const HomePage: NextPage = () => {
     <>
       <PageHead title='Home' />
       <FileUploader multiple={false} onDropAccepted={onDropAccepted} />
-      {image && <img src={image} />}
+      {image && (
+        <TransformWrapper>
+          <TransformComponent>
+            <img src={image} />
+          </TransformComponent>
+        </TransformWrapper>
+      )}
     </>
   )
 }
