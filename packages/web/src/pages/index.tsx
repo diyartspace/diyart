@@ -4,7 +4,7 @@ import Pica from 'pica/dist/pica'
 import { useCallback, useState } from 'react'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 
-import { PageHead } from '../components/common'
+import { PageHead } from '../app/common'
 
 const pica = new Pica()
 
