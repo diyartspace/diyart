@@ -6,6 +6,8 @@ import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 
 import { PageHead } from '../app/common'
 
+const pica = new Pica()
+
 const HomePage: NextPage = () => {
   const [image, setImage] = useState<string>(undefined)
 
@@ -32,7 +34,6 @@ const HomePage: NextPage = () => {
           offScreenCanvas.height = 1000
           offScreenCanvas.width = (imageObject.width * 1000) / imageObject.height
         }
-        const pica = new Pica()
         await pica.resize(imageObject, offScreenCanvas)
         setImage(offScreenCanvas.toDataURL())
       } else {
