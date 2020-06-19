@@ -9,7 +9,7 @@ export interface AuthModel {
 }
 
 export const authModel: AuthModel = {
-  ready: true,
+  ready: false,
   setUser: action((state, user) => {
     state.ready = true
     state.user = user
