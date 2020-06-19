@@ -1,17 +1,18 @@
 import { createStore, createTypedHooks } from 'easy-peasy'
 
-import { AuthStoreModel, authStoreModel } from '../auth/auth-store'
+import { AppModel, appModel } from './app-model'
 
-interface AppStoreModel {
-  readonly auth: AuthStoreModel
-}
+export const appStore = createStore(appModel)
 
-const appStoreModel: AppStoreModel = {
-  auth: authStoreModel,
-}
-
-export const appStore = createStore(appStoreModel)
-
-const { useStoreState: useAppState, useStoreActions: useAppActions } = createTypedHooks<AppStoreModel>()
+const { useStoreState: useAppState, useStoreActions: useAppActions } = createTypedHooks<AppModel>()
 
 export { useAppState, useAppActions }
+
+// Based on https://easy-peasy.now.sh/docs/recipes/hot-reloading.html
+if (process.env.NODE_ENV === 'development') {
+  if (module.hot) {
+    module.hot.accept('./app-model', () => {
+      appStore.reconfigure(appModel)
+    })
+  }
+}

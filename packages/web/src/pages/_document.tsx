@@ -1,17 +1,23 @@
+import { ServerStyleSheets } from '@material-ui/core'
 import Document, { DocumentContext, DocumentInitialProps } from 'next/document'
 import React from 'react'
 
-import { getStyletronStyleElements } from '../app/styletron'
-
-// Based on https://github.com/vercel/next.js/blob/canary/examples/with-styletron/pages/_document.js
-// and https://nextjs.org/docs/advanced-features/custom-document
 class MainDocument extends Document {
   static async getInitialProps (context: DocumentContext): Promise<DocumentInitialProps> {
-    const initialProps: DocumentInitialProps = await Document.getInitialProps(context)
+    // Collect and inject css, based on https://material-ui.com/guides/server-rendering/#handling-the-request
+    const sheets = new ServerStyleSheets()
+
+    const initialProps: DocumentInitialProps = await Document.getInitialProps({
+      ...context,
+      renderPage: () =>
+        context.renderPage({
+          enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
+        }),
+    })
 
     return {
       ...initialProps,
-      styles: [...React.Children.toArray(initialProps.styles), ...getStyletronStyleElements()],
+      styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
     }
   }
 }

@@ -1,4 +1,4 @@
-import { StyledLink } from 'baseui/link'
+import { Container, Link } from '@material-ui/core'
 import { NextPage } from 'next'
 import PageLink from 'next/link'
 
@@ -7,15 +7,15 @@ import { PageHead } from '../app/common'
 
 const SignInPage: NextPage = () => {
   return (
-    <>
+    <Container>
       <PageHead title='Sign in' />
       <PageLink href='/' passHref>
-        <StyledLink>Home</StyledLink>
+        <Link>Home</Link>
       </PageLink>
       <AuthReadyNoSsr>
         <AuthWidget />
       </AuthReadyNoSsr>
-    </>
+    </Container>
   )
 }
 

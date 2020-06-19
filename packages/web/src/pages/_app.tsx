@@ -1,24 +1,31 @@
-import '../app/auth/auth-widget.css'
-
-import { BaseProvider, LightTheme } from 'baseui'
+import { CssBaseline, ThemeProvider } from '@material-ui/core'
 import { StoreProvider } from 'easy-peasy'
 import { AppProps } from 'next/app'
-import { Provider as StyletronProvider } from 'styletron-react'
+import { useEffect } from 'react'
 
 import { appStore } from '../app/store'
-import { styletronEngine } from '../app/styletron'
+import { appTheme } from '../app/theme'
+
+const useRemoveInjectedCssEffect = () => {
+  // Based on https://material-ui.com/guides/server-rendering/#the-client-side
+  useEffect(() => {
+    const styleElement = document.querySelector('#jss-server-side')
+    if (styleElement && styleElement.parentElement) {
+      styleElement.parentElement.removeChild(styleElement)
+    }
+  }, [])
+}
 
 const MainApp = ({ Component, pageProps }: AppProps): JSX.Element => {
+  useRemoveInjectedCssEffect()
+
   return (
-    // Styletron DebugEngine is not working at the moment https://github.com/styletron/styletron/issues/366
-    // <StyletronProvider value={styletronEngine} debug={styletronDebug} debugAfterHydration>
-    <StyletronProvider value={styletronEngine}>
-      <BaseProvider theme={LightTheme}>
-        <StoreProvider store={appStore}>
-          <Component {...pageProps} />
-        </StoreProvider>
-      </BaseProvider>
-    </StyletronProvider>
+    <StoreProvider store={appStore}>
+      <ThemeProvider theme={appTheme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </StoreProvider>
   )
 }
 
