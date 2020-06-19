@@ -12,10 +12,13 @@
   "dependencies": {
     "@diyart/engine": "0.0.0",
     "baseui": "9.84.0",
+    "easy-peasy": "3.3.1",
+    "firebase": "7.15.1",
     "next": "9.4.4",
     "pica": "5.3.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-firebaseui": "4.1.0",
     "react-zoom-pan-pinch": "1.6.1",
     "styletron-engine-atomic": "1.4.6",
     "styletron-react": "5.2.7"
