@@ -1,16 +1,26 @@
+import { Button } from 'baseui/button'
 import { FileUploader } from 'baseui/file-uploader'
 import { NextPage } from 'next'
+import pdfMake from 'pdfmake/build/pdfmake'
+import pdfFonts from 'pdfmake/build/vfs_fonts'
 import Pica from 'pica/dist/pica'
 import { useCallback, useState } from 'react'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 
 import { PageHead } from '../app/common'
+pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 const pica = new Pica()
 
 const HomePage: NextPage = () => {
   const [image, setImage] = useState<string>(undefined)
 
+  const onDownloadClick = useCallback(() => {
+    const doc = {
+      content: [{ image }],
+    }
+    pdfMake.createPdf(doc).download('image.pdf')
+  }, [image])
   const onDropAccepted = useCallback((accepted: File[]) => {
     if (!accepted.length) {
       return
@@ -45,6 +55,7 @@ const HomePage: NextPage = () => {
   return (
     <>
       <PageHead title='Home' />
+      <Button onClick={onDownloadClick}>Download</Button>
       <FileUploader multiple={false} onDropAccepted={onDropAccepted} />
       {image && (
         <TransformWrapper>
