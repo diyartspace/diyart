@@ -19,7 +19,7 @@ const uiConfig: firebaseUi.auth.Config = {
   },
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   '@global': {
     // Based on https://github.com/firebase/firebaseui-web/issues/121
     '.firebaseui-id-page-callback': {
@@ -41,8 +41,10 @@ const useStyles = makeStyles({
   },
   avatar: {
     margin: '0 auto',
+    width: theme.spacing(10),
+    height: theme.spacing(10),
   },
-})
+}))
 
 export const AuthWidget: FunctionComponent = () => {
   const user = useAppState((state) => state.auth.user)
@@ -54,7 +56,7 @@ export const AuthWidget: FunctionComponent = () => {
   if (user) {
     return (
       <div className={classes.profile}>
-        <Avatar src={user.photoUrl} className={classes.avatar} />
+        <Avatar src={user.photoUrl} alt={user.displayName} className={classes.avatar} />
         <Typography variant='subtitle1' gutterBottom>
           {user.email}
         </Typography>

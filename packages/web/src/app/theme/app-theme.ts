@@ -4,6 +4,9 @@ import { uiConstants } from './ui-constants'
 
 export const appTheme = createMuiTheme({
   palette: {
+    background: {
+      default: '#ffffff',
+    },
     primary: uiConstants.primaryColor,
   },
   overrides: {
