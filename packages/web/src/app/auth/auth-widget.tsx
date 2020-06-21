@@ -1,3 +1,4 @@
+import { Avatar, Button, makeStyles, Typography } from '@material-ui/core'
 import * as firebaseUi from 'firebaseui'
 import { FunctionComponent, useCallback } from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
@@ -18,17 +19,50 @@ const uiConfig: firebaseUi.auth.Config = {
   },
 }
 
+const useStyles = makeStyles((theme) => ({
+  '@global': {
+    // Based on https://github.com/firebase/firebaseui-web/issues/121
+    '.firebaseui-id-page-callback': {
+      background: 'inherit !important',
+      boxShadow: 'none !important',
+      '& .mdl-progress': {
+        height: '0 !important',
+      },
+      '& .mdl-progress:after': {
+        content: '"Authenticating..."',
+        display: 'block',
+        textAlign: 'center',
+        padding: '1rem',
+      },
+    },
+  },
+  profile: {
+    textAlign: 'center',
+  },
+  avatar: {
+    margin: '0 auto',
+    width: theme.spacing(10),
+    height: theme.spacing(10),
+  },
+}))
+
 export const AuthWidget: FunctionComponent = () => {
   const user = useAppState((state) => state.auth.user)
   const signOut = useCallback(async () => {
     await firebase.auth().signOut()
   }, [])
+  const classes = useStyles()
 
   if (user) {
     return (
-      <div>
-        <p>Logging in as {user.email}</p>
-        <button onClick={signOut}>Sign out</button>
+      <div className={classes.profile}>
+        <Avatar src={user.photoUrl} alt={user.displayName} className={classes.avatar} />
+        <Typography variant='subtitle1' gutterBottom>
+          {user.email}
+        </Typography>
+        <Button variant='outlined' onClick={signOut}>
+          Sign out
+        </Button>
       </div>
     )
   }

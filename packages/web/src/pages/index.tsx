@@ -1,4 +1,4 @@
-import { FileUploader } from 'baseui/file-uploader'
+import { DropzoneArea } from 'material-ui-dropzone'
 import { NextPage } from 'next'
 import Pica from 'pica/dist/pica'
 import { useCallback, useState } from 'react'
@@ -45,7 +45,7 @@ const HomePage: NextPage = () => {
   return (
     <>
       <PageHead title='Home' />
-      <FileUploader multiple={false} onDropAccepted={onDropAccepted} />
+      <DropzoneArea filesLimit={1} onDrop={onDropAccepted} />
       {image && (
         <TransformWrapper>
           <TransformComponent>
