@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic'
+import { NoSsr } from '@material-ui/core'
 import { FunctionComponent } from 'react'
 
 import { useAppState } from '../store'
@@ -14,4 +14,8 @@ const AuthReady: FunctionComponent = ({ children }) => {
   return <>{children}</>
 }
 
-export const AuthReadyNoSsr = dynamic(() => Promise.resolve(AuthReady), { ssr: false })
+export const AuthReadyNoSsr: FunctionComponent = ({ children }) => (
+  <NoSsr>
+    <AuthReady>{children}</AuthReady>
+  </NoSsr>
+)

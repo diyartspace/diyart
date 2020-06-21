@@ -1,5 +1,5 @@
-import { Button } from 'baseui/button'
-import { FileUploader } from 'baseui/file-uploader'
+import Button from '@material-ui/core/Button'
+import { DropzoneArea } from 'material-ui-dropzone'
 import { NextPage } from 'next'
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
@@ -56,7 +56,7 @@ const HomePage: NextPage = () => {
     <>
       <PageHead title='Home' />
       <Button onClick={onDownloadClick}>Download</Button>
-      <FileUploader multiple={false} onDropAccepted={onDropAccepted} />
+      <DropzoneArea filesLimit={1} onDrop={onDropAccepted} />
       {image && (
         <TransformWrapper>
           <TransformComponent>
