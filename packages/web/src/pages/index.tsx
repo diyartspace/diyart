@@ -9,7 +9,7 @@ import { PageHead } from '../app/common'
 const pica = new Pica()
 
 const HomePage: NextPage = () => {
-  const [image, setImage] = useState<string>(undefined)
+  const [image, setImage] = useState<string | undefined>(undefined)
 
   const onDropAccepted = useCallback((accepted: File[]) => {
     if (!accepted.length) {
