@@ -5,15 +5,22 @@ import { appStore } from '../store'
 require('firebase/analytics')
 require('firebase/auth')
 
+const ensureEnv = (value?: string): string => {
+  if (!value) {
+    throw new Error('Env not found')
+  }
+  return value
+}
+
 const firebaseConfig = {
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  authDomain: `${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}.firebaseapp.com`,
-  databaseURL: `https://${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}.firebaseio.com`,
-  storageBucket: `${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}.appspot.com`,
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+  projectId: ensureEnv(process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID),
+  authDomain: `${ensureEnv(process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID)}.firebaseapp.com`,
+  databaseURL: `https://${ensureEnv(process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID)}.firebaseio.com`,
+  storageBucket: `${ensureEnv(process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID)}.appspot.com`,
+  apiKey: ensureEnv(process.env.NEXT_PUBLIC_FIREBASE_API_KEY),
+  messagingSenderId: ensureEnv(process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID),
+  appId: ensureEnv(process.env.NEXT_PUBLIC_FIREBASE_APP_ID),
+  measurementId: ensureEnv(process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID),
 }
 
 if (!firebase.apps.length) {
@@ -29,11 +36,17 @@ firebase.auth().onAuthStateChanged((firebaseUser) => {
   }
 
   const { uid, email, displayName, photoURL } = firebaseUser
+
+  if (!email) {
+    actions.auth.setUser(undefined)
+    return
+  }
+
   actions.auth.setUser({
     id: uid,
     email,
     displayName: displayName || email.split('@')[0],
-    photoUrl: photoURL,
+    photoUrl: photoURL || undefined,
   })
 })
 

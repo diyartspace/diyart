@@ -15,7 +15,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs
 const pica = new Pica()
 
 const HomePage: NextPage = () => {
-  const [image, setImage] = useState<string>(undefined)
+  const [image, setImage] = useState<string | undefined>(undefined)
 
   const onDownloadClick = useCallback(() => {
     const doc: TDocumentDefinitions = {

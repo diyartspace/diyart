@@ -1,4 +1,4 @@
-import { NoSsr } from '@material-ui/core'
+import { CircularProgress, Grid, NoSsr } from '@material-ui/core'
 import { FunctionComponent } from 'react'
 
 import { useAppState } from '../store'
@@ -7,8 +7,11 @@ const AuthReady: FunctionComponent = ({ children }) => {
   const isAuthReady = useAppState((state) => state.auth.ready)
 
   if (!isAuthReady) {
-    // This state will stay shortly, so no need to show loader.
-    return <></>
+    return (
+      <Grid container justify='center'>
+        <CircularProgress />
+      </Grid>
+    )
   }
 
   return <>{children}</>
