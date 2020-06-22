@@ -3,6 +3,8 @@ import { DropzoneArea } from 'material-ui-dropzone'
 import { NextPage } from 'next'
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
+import { TDocumentDefinitions } from 'pdfmake/interfaces'
+import pdfStandardPageSizes from 'pdfmake/src/standardPageSizes'
 import Pica from 'pica/dist/pica'
 import { useCallback, useState } from 'react'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
@@ -16,8 +18,10 @@ const HomePage: NextPage = () => {
   const [image, setImage] = useState<string>(undefined)
 
   const onDownloadClick = useCallback(() => {
-    const doc = {
-      content: [{ image }],
+    const doc: TDocumentDefinitions = {
+      pageSize: 'A4',
+      pageMargins: 40,
+      content: [{ image, width: pdfStandardPageSizes.A4[0] - 40 * 2 }],
     }
     pdfMake.createPdf(doc).download('image.pdf')
   }, [image])
