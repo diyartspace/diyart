@@ -1,16 +1,30 @@
+import Button from '@material-ui/core/Button'
 import { DropzoneArea } from 'material-ui-dropzone'
 import { NextPage } from 'next'
+import pdfMake from 'pdfmake/build/pdfmake'
+import pdfFonts from 'pdfmake/build/vfs_fonts'
+import { TDocumentDefinitions } from 'pdfmake/interfaces'
+import pdfStandardPageSizes from 'pdfmake/src/standardPageSizes'
 import Pica from 'pica/dist/pica'
 import { useCallback, useState } from 'react'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 
 import { PageHead } from '../app/common'
+pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 const pica = new Pica()
 
 const HomePage: NextPage = () => {
   const [image, setImage] = useState<string | undefined>(undefined)
 
+  const onDownloadClick = useCallback(() => {
+    const doc: TDocumentDefinitions = {
+      pageSize: 'A4',
+      pageMargins: 40,
+      content: [{ image, width: pdfStandardPageSizes.A4[0] - 40 * 2 }],
+    }
+    pdfMake.createPdf(doc).download('image.pdf')
+  }, [image])
   const onDropAccepted = useCallback((accepted: File[]) => {
     if (!accepted.length) {
       return
@@ -45,6 +59,7 @@ const HomePage: NextPage = () => {
   return (
     <>
       <PageHead title='Home' />
+      <Button onClick={onDownloadClick}>Download</Button>
       <DropzoneArea filesLimit={1} onDrop={onDropAccepted} />
       {image && (
         <TransformWrapper>
