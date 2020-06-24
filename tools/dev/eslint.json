@@ -43,7 +43,7 @@
     "jsx-quotes": ["error", "prefer-single"],
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-empty-interface": "off",
-    "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/unbound-method": "error",
     "@typescript-eslint/quotes": [
       "error",
       "single"

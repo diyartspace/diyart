@@ -5,6 +5,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 
 import { firebase } from '../firebase'
 import { useAppState } from '../store'
+import { User } from './user'
 
 const uiConfig: firebaseUi.auth.Config = {
   signInOptions: [
@@ -46,25 +47,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export const AuthWidget: FunctionComponent = () => {
-  const user = useAppState((state) => state.auth.user)
+interface ProfileControlProps {
+  readonly user: User
+}
+
+const ProfileControl: FunctionComponent<ProfileControlProps> = ({ user }) => {
   const signOut = useCallback(async () => {
     await firebase.auth().signOut()
   }, [])
   const classes = useStyles()
 
+  return (
+    <div className={classes.profile}>
+      <Avatar src={user.photoUrl} alt={user.displayName} className={classes.avatar} />
+      <Typography variant='subtitle1' gutterBottom>
+        {user.email}
+      </Typography>
+      <Button variant='outlined' onClick={signOut}>
+        Sign out
+      </Button>
+    </div>
+  )
+}
+
+export const AuthWidget: FunctionComponent = () => {
+  const user = useAppState((state) => state.auth.user)
+
   if (user) {
-    return (
-      <div className={classes.profile}>
-        <Avatar src={user.photoUrl} alt={user.displayName} className={classes.avatar} />
-        <Typography variant='subtitle1' gutterBottom>
-          {user.email}
-        </Typography>
-        <Button variant='outlined' onClick={signOut}>
-          Sign out
-        </Button>
-      </div>
-    )
+    return <ProfileControl user={user} />
   }
 
   return <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
