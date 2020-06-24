@@ -1,4 +1,4 @@
-import { Avatar, Button, makeStyles, Typography } from '@material-ui/core'
+import { Avatar, Button, makeStyles, Theme, Typography } from '@material-ui/core'
 import * as firebaseUi from 'firebaseui'
 import { FunctionComponent, useCallback } from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
@@ -20,7 +20,7 @@ const uiConfig: firebaseUi.auth.Config = {
   },
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   '@global': {
     // Based on https://github.com/firebase/firebaseui-web/issues/121
     '.firebaseui-id-page-callback': {

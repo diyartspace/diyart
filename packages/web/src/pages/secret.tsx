@@ -1,15 +1,16 @@
-import { Container } from '@material-ui/core'
+import { Alert } from '@material-ui/lab'
 import { NextPage } from 'next'
 
 import { AuthReadyNoSsr } from '../app/auth'
-import { PageHead } from '../app/common'
+import { PageLayout } from '../app/common'
 
 const SecretPage: NextPage = () => {
   return (
-    <Container>
-      <PageHead title='Secret' />
-      <AuthReadyNoSsr>Hello, authenticated user.</AuthReadyNoSsr>
-    </Container>
+    <PageLayout title='Secret'>
+      <AuthReadyNoSsr>
+        <Alert severity='info'>Hello, authenticated user!</Alert>
+      </AuthReadyNoSsr>
+    </PageLayout>
   )
 }
 
