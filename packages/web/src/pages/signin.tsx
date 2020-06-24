@@ -12,7 +12,7 @@ const SignInPage: NextPage = () => {
       <PageLink href='/' passHref>
         <Link>Home</Link>
       </PageLink>
-      <AuthReadyNoSsr>
+      <AuthReadyNoSsr authRequired={false}>
         <AuthWidget />
       </AuthReadyNoSsr>
     </Container>
