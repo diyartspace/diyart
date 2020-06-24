@@ -30,7 +30,13 @@ export const TopNavigationBar: FunctionComponent<TopNavigationBarProps> = ({ tit
         )}
         <AuthReadyNoSsr showLoading={false} authRequired={false}>
           <PageLink href='/signin' passHref>
-            {user ? <Avatar src={user.photoUrl} alt={user.displayName} /> : <Link color='inherit'>Sign in</Link>}
+            {user ? (
+              <Link>
+                <Avatar src={user.photoUrl} alt={user.displayName} />
+              </Link>
+            ) : (
+              <Link color='inherit'>Sign in</Link>
+            )}
           </PageLink>
         </AuthReadyNoSsr>
       </Toolbar>
