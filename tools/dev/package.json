@@ -7,16 +7,16 @@
   },
   "scripts": {
     "clean-full": "node ./lib/cli clean",
-    "build": "tsc",
     "eslint": "node ./lib/cli eslint src",
-    "prettier": "node ./lib/cli prettier 'src/**/*.ts'"
+    "prettier": "node ./lib/cli prettier 'src/**/*.ts'",
+    "build": "tsc"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "3.3.0",
-    "@typescript-eslint/parser": "3.3.0",
+    "@typescript-eslint/eslint-plugin": "3.4.0",
+    "@typescript-eslint/parser": "3.4.0",
     "chokidar": "3.4.0",
     "cross-spawn": "7.0.3",
-    "eslint": "7.3.0",
+    "eslint": "7.3.1",
     "eslint-config-standard": "14.1.1",
     "eslint-plugin-import": "2.21.2",
     "eslint-plugin-no-null": "1.0.2",
@@ -37,7 +37,7 @@
   "devDependencies": {
     "@types/chokidar": "2.1.3",
     "@types/cross-spawn": "6.0.2",
-    "@types/node": "14.0.13",
+    "@types/node": "14.0.14",
     "@types/progress": "2.0.3",
     "@types/table": "5.0.0"
   }
