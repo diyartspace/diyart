@@ -18,18 +18,22 @@ const SignInAlert: FunctionComponent = () => {
 }
 
 export interface AuthReadyProps {
+  readonly showLoading?: boolean
   readonly authRequired?: boolean
 }
 
-const AuthReady: FunctionComponent<AuthReadyProps> = ({ children, authRequired = true }) => {
+// TODO reduce complexity
+const AuthReady: FunctionComponent<AuthReadyProps> = ({ children, showLoading = true, authRequired = true }) => {
   const isAuthReady = useAppState((state) => state.auth.ready)
   const user = useAppState((state) => state.auth.user)
 
   if (!isAuthReady) {
-    return (
+    return showLoading ? (
       <Grid container justify='center'>
         <CircularProgress />
       </Grid>
+    ) : (
+      <></>
     )
   }
 

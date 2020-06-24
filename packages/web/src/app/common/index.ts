@@ -1,2 +1,2 @@
 export * from './page-head'
-export * from './top-app-bar'
+export * from './page-layout'

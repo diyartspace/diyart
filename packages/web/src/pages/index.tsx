@@ -4,7 +4,7 @@ import Pica from 'pica/dist/pica'
 import { useCallback, useState } from 'react'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 
-import { PageHead, TopAppBar } from '../app/common'
+import { PageLayout } from '../app/common'
 
 const pica = new Pica()
 
@@ -43,9 +43,7 @@ const HomePage: NextPage = () => {
   }, [])
 
   return (
-    <>
-      <PageHead title='Home' />
-      <TopAppBar appBarTitle='Home' />
+    <PageLayout title='Home'>
       <DropzoneArea filesLimit={1} onDrop={onDropAccepted} />
       {image && (
         <TransformWrapper>
@@ -54,7 +52,7 @@ const HomePage: NextPage = () => {
           </TransformComponent>
         </TransformWrapper>
       )}
-    </>
+    </PageLayout>
   )
 }
 
