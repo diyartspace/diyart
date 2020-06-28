@@ -16,7 +16,7 @@ const uiConfig: firebaseUi.auth.Config = {
     },
   ],
   callbacks: {
-    signInSuccessWithAuthResult: () => false,
+    signInSuccessWithAuthResult: () => true,
   },
 }
 
