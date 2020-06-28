@@ -1,15 +1,18 @@
 import { CircularProgress, Grid, Link, NoSsr } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import PageLink from 'next/link'
+import { useRouter } from 'next/router'
 import { FunctionComponent } from 'react'
 
 import { useAppState } from '../store'
 
 const SignInAlert: FunctionComponent = () => {
+  const router = useRouter()
+
   return (
     <Alert severity='info'>
       Please{' '}
-      <PageLink href='/signin' passHref>
+      <PageLink href={{ pathname: '/signin', query: { signInSuccessUrl: router.asPath } }} passHref>
         <Link>Sign in</Link>
       </PageLink>{' '}
       to continue.

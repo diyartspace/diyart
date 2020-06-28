@@ -1,5 +1,6 @@
 import { AppBar, Avatar, Link, makeStyles, Toolbar, Typography } from '@material-ui/core'
 import PageLink from 'next/link'
+import { useRouter } from 'next/router'
 import { FunctionComponent, ReactNode } from 'react'
 
 import { AuthReadyNoSsr } from '../auth'
@@ -19,6 +20,7 @@ export interface TopNavigationBarProps {
 export const TopNavigationBar: FunctionComponent<TopNavigationBarProps> = ({ title }) => {
   const user = useAppState((state) => state.auth.user)
   const classes = useStyles()
+  const router = useRouter()
 
   return (
     <AppBar position='fixed'>
@@ -29,7 +31,7 @@ export const TopNavigationBar: FunctionComponent<TopNavigationBarProps> = ({ tit
           </Typography>
         )}
         <AuthReadyNoSsr showLoading={false} authRequired={false}>
-          <PageLink href='/signin' passHref>
+          <PageLink href={{ pathname: '/signin', query: { signInSuccessUrl: router.asPath } }} passHref>
             {user ? (
               <Link>
                 <Avatar src={user.photoUrl} alt={user.displayName} />
