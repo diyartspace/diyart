@@ -19,7 +19,7 @@
     "start-dev": "npm run build && docker-compose -p diyart_development -f ./docker/development/docker-compose.yml up"
   },
   "engines": {
-    "node": "12.18.1"
+    "node": "12.18.3"
   },
   "devDependencies": {
     "lerna": "3.22.1"
